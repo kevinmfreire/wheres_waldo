@@ -8,9 +8,14 @@ import numpy as np
 import pandas as pd
 
 ## Obtain List of news from the coverpage
+def clean_text(contents):
+    body= contents.replace('n', ' ')
+    body= contents.replace('t', ' ')
+    body= contents.replace('r', ' ')
+    body= contents.replace('\xa0', ' ')
+    return body
 
-
-def web_scraper(url, save_path, number_of_articles):
+def web_scraper(url, number_of_articles):
     # Request
     r1 = requests.get(url)
     print(r1.status_code)
@@ -58,18 +63,23 @@ def web_scraper(url, save_path, number_of_articles):
             list_paragraphs.append(paragraph)
             final_article = " ".join(list_paragraphs)
             
-        news_contents.append(final_article)
+        # Clean the content from any additional html tags
+        clean_article = clean_text(final_article)
+        news_contents.append(clean_article)
 
+    return list_titles, news_contents, list_links
+
+def save_to_dataframe(title, content, link, save_path):
     """Let's put them into:
     * A dataset which will be the input of the models (df_features)
     * a dataset with the title and the link (df_show_info)
     """
 
-    # df_show_info
+        # df_show_info
     nbc_articles = pd.DataFrame(
-        {'Article Title': list_titles,
-        'Article Content': news_contents,
-        'Article Link': list_links})
+        {'Article Title': title,
+        'Article Content': content,
+        'Article Link': link})
 
     print(nbc_articles)
     nbc_articles.to_csv(save_path + 'ws_nbc.csv')
@@ -81,4 +91,5 @@ if __name__ == '__main__':
     save_path = '../data/ws_data/'
     number_of_articles = 5
 
-    web_scraper(url, save_path, number_of_articles)
+    titles, contents, links = web_scraper(url, number_of_articles)
+    save_to_dataframe(titles, contents, links, save_path)
