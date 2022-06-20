@@ -1,5 +1,4 @@
 # wheres_waldo
-This project was developed to identify the name, address and organization name within content of a News Article.
 
 ## Table of content
 * [Overview](https://github.com/kevinmfreire/wheres_waldo#overview)
