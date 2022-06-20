@@ -1,6 +1,13 @@
 # wheres_waldo
 This project was developed to identify the name, address and organization name within content of a News Article.
 
+## Table of content
+* [Overview](https://github.com/kevinmfreire/wheres_waldo#overview)
+* [Goals](https://github.com/kevinmfreire/wheres_waldo#goals)
+* [Practical Applications](https://github.com/kevinmfreire/wheres_waldo#practical-applications)
+* [Usage](https://github.com/kevinmfreire/wheres_waldo#usage)
+* [Conclusion](https://github.com/kevinmfreire/wheres_waldo#conclusion)
+
 ## Overview
 Natural Language Processing (NLP) Models are very popular worldwide as it can be used in many cases such as launguage translation, speech-to-text or vice versa, it can detect fraud,
 or even classify highly sensitive data. In other words, it can make our lives easier.
@@ -54,3 +61,8 @@ It will save the dataframe as a `.csv` file to `data/ws_data/` so you can take a
 python ner_model.py
 ```
 The output of the model is saved under `data/model_output/` as a `.json` and `.vsc` file.
+
+## Conclusion
+The model is a light weight model so it doesn't classify the text perfectly.  By observing the output of the model in `data/model_output/output.json` you can see that it made a few mistakes.  Nevertheless, it works pretty well.  
+The model can definitly be imporved.  In regards to the output, I've decided to have the link of the article and the output results of the model tied together.  The purpose of this is because if one would like to see what the article
+talks about based on the outputs then they can easily access the article. Keep in mind that the web scrapping will be different everyday because NBC News always has a new story so the results will be different for everyone.  
