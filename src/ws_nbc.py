@@ -67,7 +67,14 @@ def web_scraper(url, number_of_articles):
         clean_article = clean_text(final_article)
         news_contents.append(clean_article)
 
-    return list_titles, news_contents, list_links
+    # df_show_info
+    nbc_articles = pd.DataFrame({
+        # 'Article Title': list_titles,
+        'Article Link': list_links,
+        'Article Content': news_contents})
+
+    # return [list_titles, news_contents, list_links]
+    return nbc_articles
 
 def save_to_dataframe(title, content, link, save_path):
     """Let's put them into:
@@ -75,7 +82,7 @@ def save_to_dataframe(title, content, link, save_path):
     * a dataset with the title and the link (df_show_info)
     """
 
-        # df_show_info
+    # df_show_info
     nbc_articles = pd.DataFrame(
         {'Article Title': title,
         'Article Content': content,

@@ -49,6 +49,25 @@ def load_onnx_model(model_path):
     output = prepare(onnx_model)#.run(input)
     return output
 
+def get_unique_results(model_output):
+    article = {'NAME':[], 'ORGANIZATION':[], 'LOCATION':[]}
+    for word in model_output.ents:
+        if word.label_ == 'PERSON' and (word.text not in article["NAME"]):
+            article["NAME"].append(word.text)
+        elif word.label_ == 'ORG' and (word.text not in article["ORGANIZATION"]):
+            article["ORGANIZATION"].append(word.text)
+        elif word.label_ == 'GPE' and (word.text not in article["LOCATION"]):
+            article["LOCATION"].append(word.text)
+    return article
+
+def get_ner_for_all(article):
+    final_out = article.copy()
+    for index, row in final_out.iterrows():
+        spacy_results = spacner(row['Article Content'])
+        article_ner = get_unique_results(spacy_results)
+        final_out.iloc[[index], [1]] = [article_ner]
+    return final_out
+
 
 if __name__ == '__main__':
     url = 'https://www.nbcnews.com/'
@@ -56,11 +75,7 @@ if __name__ == '__main__':
     # ner_model = hf_ner()
     spacner = spacy_ner()
 
-    title, content, link = web_scraper(url, 1)
-    spacy_results = spacner(content[0])
+    article = web_scraper(url, 5)
 
-    for word in spacy_results.ents:
-        print(word.text,word.label_)
-
-    displacy.serve(spacy_results, style="ent")
-    # print(spacy_results.text, spacy_results.label_)
+    output = get_ner_for_all(article)
+    print(output)
