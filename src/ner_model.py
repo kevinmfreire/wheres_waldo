@@ -49,14 +49,14 @@ def get_unique_results(model_output):
             article["LOCATION"].append(word.text)
     return article
 
-def get_ner_for_all(article):
+def get_ner_for_all(article, model):
     ''''
     This function is used to obtain NER results for each content in the article
     and is place in a new dataframe
     '''
     final_out = article.copy()
     for index, row in final_out.iterrows():
-        spacy_results = spacner(row['Article Content'])
+        spacy_results = model(row['Article Content'])
         article_ner = get_unique_results(spacy_results)
         final_out.iloc[[index], [1]] = [article_ner]
     return final_out
@@ -68,7 +68,7 @@ def save_to_json(results, path):
         json.dump(outputDict, fp,  indent=4)
 
 def save_to_csv(results, path):
-    results.to_csv(path+'output.csv')
+    results.set_index('Article Link').to_csv(path+'output.csv')
 
 if __name__ == '__main__':
     url = 'https://www.nbcnews.com/'
@@ -80,7 +80,7 @@ if __name__ == '__main__':
 
     article = web_scraper(url, number_of_articles=num_articles)
 
-    output = get_ner_for_all(article)
+    output = get_ner_for_all(article, spacner)
 
     save_to_json(output, saved_output)
     save_to_csv(output, saved_output)
