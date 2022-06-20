@@ -4,21 +4,17 @@ import spacy
 import json
 
 from spacy import displacy
-from transformers import AutoTokenizer, TFBertForTokenClassification
-from transformers import pipeline
+# from transformers import AutoTokenizer, TFBertForTokenClassification
+# from transformers import pipeline
 from ws_nbc import web_scraper
 
-'''
-This script only has to be run once as it will save the model in a pickle file.
-You can load the model using pickle.load(open('model_path', 'rb'))
-'''
 
-def hf_ner():
-    tokenizer = AutoTokenizer.from_pretrained("dslim/bert-base-NER")
-    model = TFBertForTokenClassification.from_pretrained("dslim/bert-base-NER")
-    nlp = pipeline("ner", model=model, tokenizer=tokenizer, framework='tf')
+# def hf_ner():
+#     tokenizer = AutoTokenizer.from_pretrained("dslim/bert-base-NER")
+#     model = TFBertForTokenClassification.from_pretrained("dslim/bert-base-NER")
+#     nlp = pipeline("ner", model=model, tokenizer=tokenizer, framework='tf')
 
-    return nlp
+#     return nlp
 
 def spacy_ner():
     NER = spacy.load("en_core_web_sm")

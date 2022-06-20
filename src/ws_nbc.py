@@ -76,21 +76,6 @@ def web_scraper(url, number_of_articles=1):
     # return [list_titles, news_contents, list_links]
     return nbc_articles
 
-def save_to_dataframe(title, content, link, save_path):
-    """Let's put them into:
-    * A dataset which will be the input of the models (df_features)
-    * a dataset with the title and the link (df_show_info)
-    """
-
-    # df_show_info
-    nbc_articles = pd.DataFrame(
-        {'Article Title': title,
-        'Article Content': content,
-        'Article Link': link})
-
-    print(nbc_articles)
-    nbc_articles.to_csv(save_path + 'ws_nbc.csv')
-
 if __name__ == '__main__':
     
     # url definition
@@ -98,7 +83,7 @@ if __name__ == '__main__':
     save_path = '../data/ws_data/'
     number_of_articles = 5
 
-    titles, contents, links = web_scraper(url, number_of_articles)
-    
+    nbc_articles = web_scraper(url, number_of_articles)
+
     # Save to dataframe for visibility of output
-    save_to_dataframe(titles, contents, links, save_path)
+    nbc_articles.to_csv(save_path + 'ws_nbc.csv')
