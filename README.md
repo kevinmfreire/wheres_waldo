@@ -39,6 +39,10 @@ source .virtualenv/wheres_waldo
 ```
 pip install -r requirements.txt
 ```
+* If for some reason the spaCy model did not download then run:
+```
+./package_loader.sh
+```
 * If you want to see how the web scrapping works go to `src/` directory and run:
 ```
 python ws_nbc.py
