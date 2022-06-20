@@ -26,7 +26,6 @@ which is a light weight model for Name Entity Recongnition (NER).  It can extrac
  * Clone repo:
  ```
 git clone https://github.com/kevinmfreire/wheres_waldo.git
- 
  ```
 * Set up virtual environment:
 ```
@@ -44,10 +43,10 @@ pip install -r requirements.txt
 ```
 python ws_nbc.py
 ```
-It will save the dataframe as a `.csv` file so you can take a look at the output.
+It will save the dataframe as a `.csv` file to `data/ws_data/` so you can take a look at the output.
 
 * If you would like to see how the model works go to the `.src` directory and run:
 ```
 python ner_model.py
 ```
-The output of the model is saved under `data/modeloutput/` as a `.json` and `.vsc` file.
+The output of the model is saved under `data/model_output/` as a `.json` and `.vsc` file.
