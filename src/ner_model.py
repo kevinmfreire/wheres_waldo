@@ -1,23 +1,18 @@
-from transformers import AutoTokenizer, TFBertForTokenClassification
-from transformers import pipeline
-import pickle as pk
 import pandas as pd
 import warnings
-import onnx
-from onnx_tf.backend import prepare
-import tensorflow as tf
-
 import spacy
-from spacy import displacy
 
+from spacy import displacy
+from transformers import AutoTokenizer, TFBertForTokenClassification
+from transformers import pipeline
 from ws_nbc import web_scraper
+
 '''
 This script only has to be run once as it will save the model in a pickle file.
 You can load the model using pickle.load(open('model_path', 'rb'))
 '''
 
 def hf_ner():
-
     tokenizer = AutoTokenizer.from_pretrained("dslim/bert-base-NER")
     model = TFBertForTokenClassification.from_pretrained("dslim/bert-base-NER")
     nlp = pipeline("ner", model=model, tokenizer=tokenizer, framework='tf')
@@ -43,14 +38,11 @@ def upload_data(path):
     print(df.describe())
     return df
 
-def load_onnx_model(model_path):
-    warnings.filterwarnings('ignore')
-    onnx_model = onnx.load(model_path)
-    output = prepare(onnx_model)#.run(input)
-    return output
-
 def get_unique_results(model_output):
+    # Prepare dictionary for obtaining only Name, Organization and Location
     article = {'NAME':[], 'ORGANIZATION':[], 'LOCATION':[]}
+
+    # Iterate through each word in the sentence and extract the target entities
     for word in model_output.ents:
         if word.label_ == 'PERSON' and (word.text not in article["NAME"]):
             article["NAME"].append(word.text)
@@ -61,6 +53,10 @@ def get_unique_results(model_output):
     return article
 
 def get_ner_for_all(article):
+    ''''
+    This function is used to obtain NER results for each content in the article
+    and is place in a new dataframe
+    '''
     final_out = article.copy()
     for index, row in final_out.iterrows():
         spacy_results = spacner(row['Article Content'])
@@ -78,4 +74,6 @@ if __name__ == '__main__':
     article = web_scraper(url, 5)
 
     output = get_ner_for_all(article)
+
+    
     print(output)
