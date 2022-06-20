@@ -15,7 +15,7 @@ def clean_text(contents):
     body= contents.replace('\xa0', ' ')
     return body
 
-def web_scraper(url, number_of_articles):
+def web_scraper(url, number_of_articles=1):
     # Request
     r1 = requests.get(url)
     print(r1.status_code)
@@ -99,4 +99,6 @@ if __name__ == '__main__':
     number_of_articles = 5
 
     titles, contents, links = web_scraper(url, number_of_articles)
+    
+    # Save to dataframe for visibility of output
     save_to_dataframe(titles, contents, links, save_path)

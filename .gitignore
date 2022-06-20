@@ -1,2 +1,4 @@
 data/
 docker-compose.yml
+app.py
+src/__pychache__/

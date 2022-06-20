@@ -1,6 +1,7 @@
 import pandas as pd
 import warnings
 import spacy
+import json
 
 from spacy import displacy
 from transformers import AutoTokenizer, TFBertForTokenClassification
@@ -64,16 +65,26 @@ def get_ner_for_all(article):
         final_out.iloc[[index], [1]] = [article_ner]
     return final_out
 
+def save_to_json(results, path):
+    outputDict = results.set_index('Article Link').to_dict()['Article Content']
+
+    with open(path+'output.json', 'w') as fp:
+        json.dump(outputDict, fp,  indent=4)
+
+def save_to_csv(results, path):
+    results.to_csv(path+'output.csv')
 
 if __name__ == '__main__':
     url = 'https://www.nbcnews.com/'
+    saved_output = '../data/model_output/'
+    num_articles = 5
 
     # ner_model = hf_ner()
     spacner = spacy_ner()
 
-    article = web_scraper(url, 5)
+    article = web_scraper(url, number_of_articles=num_articles)
 
     output = get_ner_for_all(article)
 
-    
-    print(output)
+    save_to_json(output, saved_output)
+    save_to_csv(output, saved_output)
