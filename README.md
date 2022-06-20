@@ -39,7 +39,7 @@ virtualenv .virtualenv/wheres_waldo
 ```
 * Activate Virtual Environment:
 ```
-source .virtualenv/wheres_waldo
+source .virtualenv/wheres_waldo/bin/activate
 ```
 * Install all requirements:
 ```
