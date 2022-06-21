@@ -2,8 +2,8 @@ import sqlite3
 import pandas as pd
 import sys
 import argparse
-sys.path.append('./src/')
-import ws_nbc, ner_model
+sys.path.append('src/')
+from src import ws_nbc, ner_model
 
 '''
 This script has been optimized to handle one or more news article from NBC News.
@@ -46,12 +46,13 @@ if __name__ == '__main__':
     parser.add_argument('--num_articles', type=int, default=5)
     args = parser.parse_args()
 
-    spacy_ner = ner_model.model()
+    spacy_ner = ner_model.Model()
 
     if args.multi_article:
         nbc_news = 'https://www.nbcnews.com/'
-        nbc_article = ws_nbc.web_scrape(nbc_news)
-        article = nbc_article.scrape_N_articles(num_articles=args.num_articles)
+        nbc_article = ws_nbc.WebScrape(nbc_news)
+        article = nbc_article.scrape_n_articles(num_articles=args.num_articles)
+        print("Scraping {} articles from NBC News Webpage".format(args.num_articles))
         model_out = spacy_ner.get_ner_for_all(article)
         df = pd.DataFrame()
         for i in range(0,len(model_out)):
@@ -59,7 +60,7 @@ if __name__ == '__main__':
             df = pd.concat([df, article_df])
     else:
         article_url = input("Input NBC News article url: ")
-        nbc_article = ws_nbc.web_scrape(article_url)
+        nbc_article = ws_nbc.WebScrape(article_url)
         article = nbc_article.scrape_news_article()
         model_out = spacy_ner.ner(article.get('article content'))
         ner_unique = ner_model.get_unique_results(model_out)

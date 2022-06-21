@@ -1,9 +1,9 @@
 import spacy
 import json
 import argparse
-from ws_nbc import web_scrape
+from ws_nbc import WebScrape
 
-class model:
+class Model:
     '''
     This class initializes the Spacy pipline for NER.  You can initialize it by calling
     model = model() then to pass a text you call model.ner(text).  To get a dataframe of
@@ -70,12 +70,12 @@ if __name__ == '__main__':
     parser.add_argument('--num_articles', type=int, default=5)
     args = parser.parse_args()
 
-    spacy_ner = model()
-    nbc_news = web_scrape(args.nbc_url)
-    nbc_article = web_scrape(args.nbc_article_url)
+    spacy_ner = Model()
+    nbc_news = WebScrape(args.nbc_url)
+    nbc_article = WebScrape(args.nbc_article_url)
 
     # For multiple Articles
-    multi_article = nbc_news.scrape_N_articles(num_articles=args.num_articles)
+    multi_article = nbc_news.scrape_n_articles(num_articles=args.num_articles)
     output = spacy_ner.get_ner_for_all(multi_article)
 
     # For a single article

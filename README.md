@@ -82,9 +82,9 @@ SELECT LOCATION FROM article
 python main.py --multi_article True
 ```
 Default value for number of articles is 5, if you want more then add argument `--num_articles` and place desired number.
-* To run a basic Unit Test then go to `./tests/` and run:
+* To run a basic Unit Test run:
 ```
-python basic_test.py
+python -m unittest basic_test.py
 ```
 
 ## Conclusion
