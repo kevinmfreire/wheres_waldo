@@ -1,5 +1,6 @@
 import spacy
 import json
+import argparse
 from ws_nbc import web_scrape
 
 class model:
@@ -61,17 +62,20 @@ def save_to_csv(results, path):
     results.set_index('article link').to_csv(path+'output.csv')
 
 if __name__ == '__main__':
-    url = 'https://www.nbcnews.com/'
-    article_url = 'https://www.nbcnews.com/politics/biden-says-considering-gas-tax-holiday-rcna34419'
-    saved_output = '../data/model_output/'
-    num_articles = 5
+
+    parser= argparse.ArgumentParser()
+    parser.add_argument('--nbc_url', type=str, default='https://www.nbcnews.com/')
+    parser.add_argument('--nbc_article_url', type=str, default='https://www.nbcnews.com/politics/biden-says-considering-gas-tax-holiday-rcna34419')
+    parser.add_argument('--save_path', type=str, default='../data/model_output/')
+    parser.add_argument('--num_articles', type=int, default=5)
+    args = parser.parse_args()
 
     spacy_ner = model()
-    nbc_news = web_scrape(url)
-    nbc_article = web_scrape(article_url)
+    nbc_news = web_scrape(args.nbc_url)
+    nbc_article = web_scrape(args.nbc_article_url)
 
     # For multiple Articles
-    multi_article = nbc_news.scrape_N_articles(num_articles=num_articles)
+    multi_article = nbc_news.scrape_N_articles(num_articles=args.num_articles)
     output = spacy_ner.get_ner_for_all(multi_article)
 
     # For a single article
@@ -79,5 +83,5 @@ if __name__ == '__main__':
     model_out = spacy_ner.ner(article.get('article content'))
     unique_results = get_unique_results(model_out)
 
-    save_to_json(output, saved_output)
-    save_to_csv(output, saved_output)
+    save_to_json(output, args.save_path)
+    save_to_csv(output, args.save_path)

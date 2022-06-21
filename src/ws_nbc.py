@@ -1,7 +1,8 @@
 import requests
-from bs4 import BeautifulSoup
 import numpy as np
 import pandas as pd
+import argparse
+from bs4 import BeautifulSoup
 
 class web_scrape:
     '''
@@ -91,20 +92,21 @@ class web_scrape:
         return nbc_articles
 
 if __name__ == '__main__':
-    
-    # url definition
-    url = 'https://www.nbcnews.com/'
-    article_url = 'https://www.nbcnews.com/politics/biden-says-considering-gas-tax-holiday-rcna34419'
-    save_path = '../data/ws_data/'
-    number_of_articles = 5
+
+    parser= argparse.ArgumentParser()
+    parser.add_argument('--nbc_url', type=str, default='https://www.nbcnews.com/')
+    parser.add_argument('--nbc_article_url', type=str, default='https://www.nbcnews.com/politics/biden-says-considering-gas-tax-holiday-rcna34419')
+    parser.add_argument('--save_path', type=str, default='../data/ws_data/')
+    parser.add_argument('--num_articles', type=int, default=5)
+    args = parser.parse_args()
 
     # Scrape a single article
-    nbc_article = web_scrape(article_url)
+    nbc_article = web_scrape(args.nbc_article_url)
     article = nbc_article.scrape_news_article()
 
     # Scrape N articles
-    nbc_news = web_scrape(url)
-    nbc_articles = nbc_news.scrape_N_articles(num_articles=number_of_articles)
+    nbc_news = web_scrape(args.nbc_url)
+    nbc_articles = nbc_news.scrape_N_articles(num_articles=args.num_articles)
 
     # Save to dataframe for visibility of output
-    nbc_articles.to_csv(save_path + 'ws_nbc.csv')
+    nbc_articles.to_csv(args.save_path + 'ws_nbc.csv')
