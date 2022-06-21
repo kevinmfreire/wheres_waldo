@@ -71,13 +71,13 @@ python main.py
 ```
 Once you run `main.py` it will ask you to place an NBC news article.  Navigate to your NBC news article of interest and past the link on your CLI. 
 It will then ask you to input an SQL search query for the NER extraction of the article.  Following search query examples are:
-            '''
+            ```
             SELECT * FROM article
             SELECT NAME FROM article
             SELECT ORGANIZATION FROM article
             SELECT LOCATION FROM article
             ...
-            '''
+            ```
 * To observe how the model works on multiple articles and would like to search NAME, ORGANIZATION, and LOCATION mentioned in article then run:
 ```
 python main.py --multi_article True
