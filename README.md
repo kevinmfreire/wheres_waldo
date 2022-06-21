@@ -42,7 +42,7 @@ git clone https://github.com/kevinmfreire/wheres_waldo.git
 ```
 virtualenv .virtualenv/wheres_waldo
 ```
-* Activate Virtual Environment:
+* Activate virtual environment:
 ```
 source .virtualenv/wheres_waldo/bin/activate
 ```
@@ -65,11 +65,11 @@ It will save the dataframe as a `.csv` file to `data/ws_data/` so you can take a
 python ner_model.py
 ```
 The output of the model is saved under `data/model_output/` as a `.json` and `.csv` file.
-* To observe how the model works on a single article and would like to search NAME, ORGANIZATION, and LOCATION mentioned in article then run:
+* To observe how the model works on a single article and would like to search NAME, ORGANIZATION, and LOCATION mentioned in the article then run:
 ```
 python main.py
 ```
-Once you run `main.py` it will ask you to place an NBC news article.  Navigate to your NBC news article of interest and past the link on your CLI. 
+Once you run `main.py` it will ask you to place an NBC news article.  Navigate to your NBC news article of interest and copy/paste the link on your CLI. 
 It will then ask you to input an SQL search query for the NER extraction of the article.  Following search query examples are:
 ```
 SELECT * FROM article
