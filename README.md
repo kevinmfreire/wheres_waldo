@@ -64,6 +64,11 @@ The output of the model is saved under `data/model_output/` as a `.json` and `.v
 ```
 python main.py
 ```
+* To observe how the model works on multiple articles and would like to search NAME, ORGANIZATION, and LOCATION mentioned in article then run:
+```
+python main.py --multi_article True
+```
+Default value for number of articles is 5, if you want more then add argument `--num_articles` and place desired number.
 * To run a basic Unit Test then go to `./tests/` and run:
 ```
 python basic_test.py
