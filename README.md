@@ -60,8 +60,16 @@ It will save the dataframe as a `.csv` file to `data/ws_data/` so you can take a
 python ner_model.py
 ```
 The output of the model is saved under `data/model_output/` as a `.json` and `.vsc` file.
+* To observe how the model works on a single article and would like to search NAME, ORGANIZATION, and LOCATION mentioned in article then run:
+```
+python main.py
+```
+* To run a basic Unit Test then go to `./tests/` and run:
+```
+python basic_test.py
+```
 
 ## Conclusion
 The model is a light weight model so it doesn't classify the text perfectly.  By observing the output of the model in `data/model_output/output.json` you can see that it made a few mistakes.  Nevertheless, it works pretty well.  
 The model can definitly be imporved.  In regards to the output, I've decided to have the link of the article and the output results of the model tied together.  The purpose of this is because if one would like to see what the article
-talks about based on the outputs then they can easily access the article. Keep in mind that the web scrapping will be different everyday because NBC News always has a new story so the results will be different for everyone.  
+talks about based on the outputs then they can easily access the article. Keep in mind that the web scrapping will be different everyday because NBC News always has a new story so the results will be different for everyone.  Please feel free to place any contributions and if you have any issues feel free to reach out.
