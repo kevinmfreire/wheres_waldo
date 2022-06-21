@@ -64,7 +64,7 @@ It will save the dataframe as a `.csv` file to `data/ws_data/` so you can take a
 ```
 python ner_model.py
 ```
-The output of the model is saved under `data/model_output/` as a `.json` and `.vsc` file.
+The output of the model is saved under `data/model_output/` as a `.json` and `.csv` file.
 * To observe how the model works on a single article and would like to search NAME, ORGANIZATION, and LOCATION mentioned in article then run:
 ```
 python main.py
