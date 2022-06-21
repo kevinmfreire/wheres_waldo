@@ -76,6 +76,7 @@ class web_scrape:
             
             # Unifying the paragraphs
             list_paragraphs = []
+            final_article = ""
             for p in np.arange(0, len(x)):
                 paragraph = x[p].get_text()
                 list_paragraphs.append(paragraph)

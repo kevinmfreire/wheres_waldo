@@ -7,12 +7,19 @@ import ws_nbc, ner_model
 
 '''
 This script has been optimized to handle one or more news article from NBC News.
+
 User Arguments:
                 --multi_article (Default = False)
                 --num_articles (if multi_article is set to True you can place the amount of articles you want to extract)
 
 User Inputs:
                 Article URL if multi_article is False
+                SQL commands
+                        SELECT * FROM article
+                        SELECT NAME FROM article
+                        SELECT ORGANIZATION FROM article
+                        SELECT LOCATION FROM article
+                        ... 
 
 outputs:
                 result query
