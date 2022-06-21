@@ -1,4 +1,8 @@
 # wheres_waldo
+### Requirements for this project
+* Python 3.8.x
+* TensorFlow 2.x
+
 ## Table of content
 * [Overview](https://github.com/kevinmfreire/wheres_waldo#overview)
 * [Goals](https://github.com/kevinmfreire/wheres_waldo#goals)
@@ -78,7 +82,3 @@ python basic_test.py
 The model is a light weight model so it doesn't classify the text perfectly.  By observing the output of the model in `data/model_output/output.json` you can see that it made a few mistakes.  Nevertheless, it works pretty well.  
 The model can definitly be imporved.  In regards to the output, I've decided to have the link of the article and the output results of the model tied together.  The purpose of this is because if one would like to see what the article
 talks about based on the outputs then they can easily access the article. Keep in mind that the web scrapping will be different everyday because NBC News always has a new story so the results will be different for everyone.  Please feel free to place any contributions and if you have any issues feel free to reach out.
-
-## Requirements
-* Python 3.8.x
-* TensorFlow 2.x
