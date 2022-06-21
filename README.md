@@ -13,7 +13,7 @@
 * [Requirements](https://github.com/kevinmfreire/wheres_waldo#requirements)
 
 ## Overview
-Natural Language Processing (NLP) Models are very popular worldwide as it can be used in many cases such as launguage translation, speech-to-text or vice versa, it can detect fraud,
+Natural Language Processing (NLP) Models are very popular worldwide as it can be used in many cases such as language translation, speech-to-text or vice versa, it can detect fraud,
 or even classify highly sensitive data. In other words, it can make our lives easier.
 
 This project is for the purpose of extracting names, organizations and locations from a news article, more specifically NBC News.  It is done by using the spaCy pretrained model `en_core_web_sm`
@@ -25,11 +25,11 @@ which is a light weight model for Name Entity Recongnition (NER).  It can extrac
  * Design and Implement an NLP model using TensorFlow 2.0 to identify name, location, and organization within a text.
  * Write a python application that uses a web scraper to extract text from a news article (NBC news).
  * Use the created model to identify name, location and organization from the extracted text.
- * Store the results in a database (`.csv` and `.json`)
- * Set up a unit test for the code
+ * Store the results in a database.
+ * Set up a unit test for the code.
 
  ## Practical Applications
- * Extract information on certain artciles on the web to detect privacy misconduct.
+ * Extract information on certain articles on the web to detect privacy misconduct.
  * Analyze multiple articles to find rising trends (e.g What company/person/location is mentioned most).
  * Quickly parse through resume to find name, location and companies that applicant was involved in.
 
@@ -89,5 +89,5 @@ python -m unittest basic_test.py
 
 ## Conclusion
 The model is a light weight model so it doesn't classify the text perfectly.  By observing the output of the model in `data/model_output/output.json` you can see that it made a few mistakes.  Nevertheless, it works pretty well.  
-The model can definitly be imporved.  In regards to the output, I've decided to have the link of the article and the output results of the model tied together.  The purpose of this is because if one would like to see what the article
-talks about based on the outputs then they can easily access the article. Keep in mind that the web scrapping will be different everyday because NBC News always has a new story so the results will be different for everyone.  Please feel free to place any contributions and if you have any issues feel free to reach out.
+The model can definitely be improved.  In regards to the output, I've decided to have the link of the article and the output results of the model tied together.  The purpose of this is because if one would like to see what the article
+talks about based on the outputs then they can easily access the article. Keep in mind that the web scrapping will be different everyday because NBC News updates its content so the results will be different for everyone.  Please feel free to place any contributions and if you have any issues feel free to reach out.
