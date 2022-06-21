@@ -17,7 +17,6 @@
             "Medicaid",
             "State",
             "Health and Human Services",
-            "Medicaid, Social Security",
             "Congress",
             "the Supplemental Nutrition Assistance Program",
             "DFW Refugee Outreach Services",
@@ -46,6 +45,7 @@
             "Connecticut",
             "Pennsylvania",
             "Iowa",
+            "Mashal",
             "Mina"
         ]
     },
@@ -88,6 +88,27 @@
             "China"
         ]
     },
+    "https://www.nbcnews.com/news/us-news/kidnapped-florida-man-drove-erratically-police-pull-authorities-say-rcna34415": {
+        "NAME": [
+            "Cameron White",
+            "Tsdekiel Sellers",
+            "Benyahveen Radcliffe",
+            "Kashaveeyah Bragdon"
+        ],
+        "ORGANIZATION": [
+            "the Martin County Sheriff\u2019s Office",
+            "White",
+            "the Port St. Lucie Police Department"
+        ],
+        "LOCATION": [
+            "Florida",
+            "Atlanta",
+            "Buffalo",
+            "Tallahassee",
+            "West Palm Beach",
+            "Martin County"
+        ]
+    },
     "https://www.nbcnews.com/news/us-news/yellowstone-reopen-2-weeks-influx-cash-repairs-rcna34421": {
         "NAME": [
             "Gardiner",
@@ -108,33 +129,11 @@
             "Lamar Valley"
         ]
     },
-    "https://www.nbcnews.com/health/health-news/medicare-drug-prices-us-billions-generics-buying-mark-cuban-prices-stu-rcna33949": {
-        "NAME": [
-            "Mark Cuban",
-            "Hussain Saleem Lalani",
-            "Lalani",
-            "Juliette Cubanski"
-        ],
-        "ORGANIZATION": [
-            "Medicare",
-            "Cost Plus Drug Company",
-            "Annals of Internal Medicine",
-            "Women\u2019s Hospital",
-            "Cost Plus Drug",
-            "the Kaiser Family Foundation",
-            "NBC",
-            "Twitter & Facebook"
-        ],
-        "LOCATION": [
-            "U.S.",
-            "Brigham",
-            "Boston"
-        ]
-    },
     "https://www.nbcnews.com/news/world/tooth-patrice-lumumba-congo-independence-returned-familly-belgium-rcna33270": {
         "NAME": [
             "Patrice Lumumba",
             "George Floyd",
+            "Roland Lumumba",
             "Georges Nzongola-Ntalaja",
             "Reuben Loffman",
             "Lumumba",
@@ -153,7 +152,6 @@
             "Lumumba\u2019s",
             "Christophe Marchand",
             "Lumumba",
-            "Roland Lumumba",
             "Kinshasa",
             "DRC",
             "the University of North Carolina",

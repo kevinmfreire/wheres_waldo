@@ -7,14 +7,6 @@ from bs4 import BeautifulSoup
 import numpy as np
 import pandas as pd
 
-## Obtain List of news from the coverpage
-def clean_text(contents):
-    body= contents.replace('n', ' ')
-    body= contents.replace('t', ' ')
-    body= contents.replace('r', ' ')
-    body= contents.replace('\xa0', ' ')
-    return body
-
 class web_scrape:
     '''
     This web scrapping class allows you to scrape a single news article of your choice,
@@ -42,9 +34,8 @@ class web_scrape:
             paragraph = x[p].get_text()
             list_paragraphs.append(paragraph)
             final_article = " ".join(list_paragraphs)
-        clean_article = clean_text(final_article)
 
-        article_dict = {'article link': self.url, 'article content': clean_article}
+        article_dict = {'article link': self.url, 'article content': final_article}
 
         return article_dict
 
@@ -86,15 +77,13 @@ class web_scrape:
                 list_paragraphs.append(paragraph)
                 final_article = " ".join(list_paragraphs)
                 
-            # Clean the content from any additional html tags
-            clean_article = clean_text(final_article)
-            news_contents.append(clean_article)
+            news_contents.append(final_article)
 
         # df_show_info
         nbc_articles = pd.DataFrame({
             # 'Article Title': list_titles,
-            'Article Link': list_links,
-            'Article Content': news_contents})
+            'article link': list_links,
+            'article content': news_contents})
 
         return nbc_articles
 

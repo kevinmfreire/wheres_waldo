@@ -5,9 +5,9 @@ from ner_model import model, get_unique_results
 from ws_nbc import web_scrape
 
 def create_sql_server():
-    conn = sqlite3.connect('test_database')
+    conn = sqlite3.connect('ner_database')
     c = conn.cursor()
-    c.execute('CREATE TABLE IF NOT EXISTS articles (Article link, NER results)')
+    c.execute('CREATE TABLE IF NOT EXISTS articles (NAME, ORGANIZATION, LOCATION)')
     conn.commit()
     return conn, c
 
@@ -36,9 +36,11 @@ if __name__ == '__main__':
 
     df.to_sql('articles', conn, if_exists='replace', index = False)
 
-    c.execute('''  
-    SELECT * FROM articles
-            ''')
+    sql_input = ''
+    while sql_input != 'quit':
+        sql_input = input("Input search query: ")
 
-    for row in c.fetchall():
-        print (row)
+        c.execute(sql_input)
+
+        for row in c.fetchall():
+            print (row)

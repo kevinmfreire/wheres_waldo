@@ -23,7 +23,7 @@ class model:
         '''
         final_out = article.copy()
         for index, row in final_out.iterrows():
-            spacy_results = self.model(row['Article Content'])
+            spacy_results = self.model(row['article content'])
             article_ner = get_unique_results(spacy_results)
             final_out.iloc[[index], [1]] = [article_ner]
         return final_out
@@ -43,13 +43,13 @@ def get_unique_results(model_output):
     return article
 
 def save_to_json(results, path):
-    outputDict = results.set_index('Article Link').to_dict()['Article Content']
+    outputDict = results.set_index('article link').to_dict()['article content']
 
     with open(path+'output.json', 'w') as fp:
         json.dump(outputDict, fp,  indent=4)
 
 def save_to_csv(results, path):
-    results.set_index('Article Link').to_csv(path+'output.csv')
+    results.set_index('article link').to_csv(path+'output.csv')
 
 if __name__ == '__main__':
     url = 'https://www.nbcnews.com/'
