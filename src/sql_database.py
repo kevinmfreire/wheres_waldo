@@ -1,8 +1,8 @@
 import sqlite3
 import pandas as pd
 
-from ner_model import spacy_ner, get_ner_for_all
-from ws_nbc import web_scraper
+from ner_model import model, get_unique_results
+from ws_nbc import web_scrape
 
 def create_sql_server():
     conn = sqlite3.connect('test_database')
@@ -11,23 +11,29 @@ def create_sql_server():
     conn.commit()
     return conn, c
 
-def creat_article_content_df(article):
+def ner_to_df(article):
     dict1 = article['Article Content'][0]
     df = pd.DataFrame(dict([(k,pd.Series(v)) for k,v in dict1.items()]))
     return df
 
+def dict_to_df(ner_unique):
+    return pd.DataFrame(dict([(k,pd.Series(v)) for k,v in ner_unique.items()]))
+
 if __name__ == '__main__':
     url = 'https://www.nbcnews.com/'
+    article_url = 'https://www.nbcnews.com/politics/biden-says-considering-gas-tax-holiday-rcna34419'
 
-    spacner = spacy_ner()
+    spacy_ner = model()
+    nbc_article = web_scrape(article_url)
 
-    article = web_scraper(url)
-
-    output = get_ner_for_all(article, spacner)
+    # For a single article
+    article = nbc_article.scrape_news_article()
+    model_out = spacy_ner.ner(article.get('article content'))
+    ner_unique = get_unique_results(model_out)
+    df = dict_to_df(ner_unique)
 
     conn, c = create_sql_server()
 
-    df = creat_article_content_df(output)
     df.to_sql('articles', conn, if_exists='replace', index = False)
 
     c.execute('''  

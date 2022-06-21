@@ -1,39 +1,35 @@
+from enum import unique
 import pandas as pd
 import warnings
 import spacy
 import json
 
 from spacy import displacy
-# from transformers import AutoTokenizer, TFBertForTokenClassification
-# from transformers import pipeline
-from ws_nbc import web_scraper
+from ws_nbc import web_scrape
 
-
-# def hf_ner():
-#     tokenizer = AutoTokenizer.from_pretrained("dslim/bert-base-NER")
-#     model = TFBertForTokenClassification.from_pretrained("dslim/bert-base-NER")
-#     nlp = pipeline("ner", model=model, tokenizer=tokenizer, framework='tf')
-
-#     return nlp
-
-def spacy_ner():
-    NER = spacy.load("en_core_web_sm")
-    return NER
-
-
-def upload_data(path):
+class model:
     '''
-    DATA UPLOAD AND EXPLORATION
+    This class initializes the Spacy pipline for NER.  You can initialize it by calling
+    model = model() then to pass a text you call model.ner(text).  To get a dataframe of
+    N number of articles then you call model.get_ner_for_all(articles).
     '''
-    # Load dataset
-    df = pd.read_csv(path, header=0)
+    def __init__(self):
+        self.model = spacy.load("en_core_web_sm")
 
-    # Drop any unwanted columns
-    df.drop(['selected_text', 'textID'], axis=1, inplace=True)
+    def ner(self, content):
+        return self.model(content)
 
-    print('\n\033[1mData Dimension:\033[0m Dataset consists of {} columns & {} records.'.format(df.shape[1], df.shape[0]))
-    print(df.describe())
-    return df
+    def get_ner_for_all(self, article):
+        ''''
+        This function is used to obtain NER results for each content in the article
+        and is place in a new dataframe
+        '''
+        final_out = article.copy()
+        for index, row in final_out.iterrows():
+            spacy_results = self.model(row['Article Content'])
+            article_ner = get_unique_results(spacy_results)
+            final_out.iloc[[index], [1]] = [article_ner]
+        return final_out
 
 def get_unique_results(model_output):
     # Prepare dictionary for obtaining only Name, Organization and Location
@@ -49,18 +45,6 @@ def get_unique_results(model_output):
             article["LOCATION"].append(word.text)
     return article
 
-def get_ner_for_all(article, model):
-    ''''
-    This function is used to obtain NER results for each content in the article
-    and is place in a new dataframe
-    '''
-    final_out = article.copy()
-    for index, row in final_out.iterrows():
-        spacy_results = model(row['Article Content'])
-        article_ner = get_unique_results(spacy_results)
-        final_out.iloc[[index], [1]] = [article_ner]
-    return final_out
-
 def save_to_json(results, path):
     outputDict = results.set_index('Article Link').to_dict()['Article Content']
 
@@ -72,15 +56,22 @@ def save_to_csv(results, path):
 
 if __name__ == '__main__':
     url = 'https://www.nbcnews.com/'
+    article_url = 'https://www.nbcnews.com/politics/biden-says-considering-gas-tax-holiday-rcna34419'
     saved_output = '../data/model_output/'
     num_articles = 5
 
-    # ner_model = hf_ner()
-    spacner = spacy_ner()
+    spacy_ner = model()
+    nbc_news = web_scrape(url)
+    nbc_article = web_scrape(article_url)
 
-    article = web_scraper(url, number_of_articles=num_articles)
+    # For multiple Articles
+    multi_article = nbc_news.scrape_N_articles(num_articles=num_articles)
+    output = spacy_ner.get_ner_for_all(multi_article)
 
-    output = get_ner_for_all(article, spacner)
+    # For a single article
+    article = nbc_article.scrape_news_article()
+    model_out = spacy_ner.ner(article.get('article content'))
+    unique_results = get_unique_results(model_out)
 
     save_to_json(output, saved_output)
     save_to_csv(output, saved_output)
