@@ -1,11 +1,10 @@
 import sqlite3
 import pandas as pd
-
 from ner_model import model, get_unique_results
 from ws_nbc import web_scrape
 
 '''
-This script is only optimized to handle one news article.
+This script is only optimized to handle one news article from NBC News.
 User Inputs: 
                 article url = Copy and paste an NBC news article URL
                 sql query:
@@ -34,14 +33,12 @@ def dict_to_df(ner_unique):
     return pd.DataFrame(dict([(k,pd.Series(v)) for k,v in ner_unique.items()]))
 
 if __name__ == '__main__':
-    # article_url = 'https://www.nbcnews.com/politics/biden-says-considering-gas-tax-holiday-rcna34419'
 
     article_url = input("Place and NBC News article url: ")
 
     spacy_ner = model()
     nbc_article = web_scrape(article_url)
 
-    # For a single article
     article = nbc_article.scrape_news_article()
     model_out = spacy_ner.ner(article.get('article content'))
     ner_unique = get_unique_results(model_out)

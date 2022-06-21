@@ -1,7 +1,5 @@
 import spacy
 import json
-
-from spacy import displacy
 from ws_nbc import web_scrape
 
 class model:
@@ -19,7 +17,7 @@ class model:
     def get_ner_for_all(self, article):
         ''''
         This function is used to obtain NER results for each content in the article
-        and is place in a new dataframe
+        and is place in a new dataframe.
         '''
         final_out = article.copy()
         for index, row in final_out.iterrows():
@@ -29,10 +27,21 @@ class model:
         return final_out
 
 def get_unique_results(model_output):
-    # Prepare dictionary for obtaining only Name, Organization and Location
+    '''
+    This function prepares a dictionary:
+
+    article = {
+        'NAME' : [...],
+        'ORGANIZATION' : [...],
+        'LOCATION' : [...]
+    }
+
+    It then appends the desired entities from the NER model output into the dictionary.  The entities are,
+    ORG (company, organizations, etc.), PERSON (Name or person), and GPE (Location).
+    '''
+
     article = {'NAME':[], 'ORGANIZATION':[], 'LOCATION':[]}
 
-    # Iterate through each word in the sentence and extract the target entities
     for word in model_output.ents:
         if word.label_ == 'PERSON' and (word.text not in article["NAME"]):
             article["NAME"].append(word.text)

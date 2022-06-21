@@ -1,7 +1,3 @@
-# -*- coding: utf-8 -*-
-"""WS_NBC.ipynb
-# Web Scrapping NBC News
-"""
 import requests
 from bs4 import BeautifulSoup
 import numpy as np
@@ -11,9 +7,16 @@ class web_scrape:
     '''
     This web scrapping class allows you to scrape a single news article of your choice,
     or you can scrape multiple news article and store it to a dataframe.  You need to initialize the 
-    class with the specific url and depending on your choice run to scrape one article or more than one. 
+    class with the specific url and depending on your choice, run to scrape one article or more than one. 
     Keep in mind that the scrape_N_articles() also allows you to scrape one article, however it is a
     random article from the landing page of NBC News.
+
+    def __init__()              ---->   Initialize requests and obtains content from landing page of URL
+
+    def scrape_news_article()   ---->   Web Scrapping of a single news article
+
+    def scrap_N_articles()      ---->   Web Scrapping of multipl articles of the NBC home page
+
     '''
     def __init__(self, url):
         self.url = url

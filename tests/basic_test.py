@@ -1,9 +1,11 @@
 import unittest
 import sys
 sys.path.append('../src/')
-
-# All the functions and class we want to test
 import ws_nbc, ner_model
+
+'''
+A simple basic unit test of model and web scrapping.
+'''
 
 class Testing(unittest.TestCase):
 
