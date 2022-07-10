@@ -30,6 +30,7 @@ class WebScrape:
         self.soup = BeautifulSoup(self.coverpage, 'html5lib')
 
     def scrape_news_article(self):
+        title = self.soup.find('h1').get_text()
         x = self.soup.find_all('p', {'class':['','endmark']})
 
         # Unifying the paragraphs
@@ -39,7 +40,7 @@ class WebScrape:
             list_paragraphs.append(paragraph)
             final_article = " ".join(list_paragraphs)
 
-        article_dict = {'article link': self.url, 'article content': final_article}
+        article_dict = {'article link': self.url, 'article title' : title, 'article content': final_article}
 
         return article_dict
 

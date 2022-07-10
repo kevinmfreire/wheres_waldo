@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html >
+<html>
 <head>
   <meta charset="UTF-8">
   <title>My Machine Learning Model</title>
@@ -10,21 +10,27 @@
 </head>
   
 <body>
-  <div class="h-100 d-flex align-items-center justify-content-center">
-      <div class="login">
-          <h2>NBC News Name Entity Recognition with spaCy</h2>
+  <div class="h-100 align-items-center justify-content-center" style="background-color:cadetblue">
+      <div class="login" style="margin-left:5%">
+          <h1>Name-Entity-Recognition App</h1>
+          <p><b>NBC News NER with SpaCy</b></p>
+          <br>
             <p>Introduce your NBC News Article URL:</p>
             <!-- Inputs for our ML model -->
               <form action="{{ url_for('predict')}}"method="post">
                 <input type="text" name="url" placeholder="NBC Article URL" required="required" />
-                <button type="submit" class="btn btn-primary btn-block btn-large">Render Article!</button>
-                <button type="reset" class="btn btn-primary btn-block btn-larg"> Reset </button>
+                <button type="submit" class="btn btn-primary btn-block btn-large">Render Article</button>
               </form>
           
               
             <br>
             <br>
-            <b> {{ prediction_text|markdown }} </b>
+            <div class="w-75" style="background-color:rgba(196, 165, 154, 0.87)">
+              <h3> {{ article_title }} </h3>
+              <br>
+                {{ prediction_text|markdown }}
+            </div>
+            
       </div>
   </div>
 </body>
