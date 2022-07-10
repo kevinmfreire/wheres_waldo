@@ -1,4 +1,7 @@
 # wheres_waldo
+
+![app](/img/app.png)
+
 ### Requirements for this project
 * Python 3.x
 * TensorFlow 2.x
