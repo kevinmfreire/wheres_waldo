@@ -3,8 +3,7 @@
 ![app](/img/app.png)
 
 ### Requirements for this project
-* Python 3.x
-* TensorFlow 2.x
+* Python 3.8.x
 * Linux OS
 
 ## Table of content
@@ -52,10 +51,6 @@ source .virtualenv/wheres_waldo/bin/activate
 * Install all requirements:
 ```
 pip install -r requirements.txt
-```
-* If for some reason the spaCy model did not download then run:
-```
-./package_loader.sh
 ```
 * If you want to see how the web scrapping works go to `src/` directory and run:
 ```
