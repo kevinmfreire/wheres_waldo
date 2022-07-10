@@ -1,0 +1,4 @@
+# Ignore files noto necessary to run web application in Heroku
+img/
+basic_test.py
+main.py
